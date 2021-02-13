@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const API_URL = 'https://api.themoviedb.org/3/movie';
-const PICTURES_BASE_URL = 'http://image.tmdb.org/t/p/';
+const PICTURES_BASE_URL = 'https://image.tmdb.org/t/p/';
 const PICTURES_FILE_SIZE = 'w780';
 const API_KEY = process.env.TMDB_API_KEY || 'not_a_valid_api_key';
 
