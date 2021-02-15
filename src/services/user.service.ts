@@ -22,7 +22,7 @@ export async function findUserData(userId: string) {
   }
 }
 
-export async function addWatchedMovie(userId: string, movieId: string) {
+export async function addWatchedMovie(userId: string, movieId: number) {
   try {
     return documentToUser(
       await userDataModel.findOneAndUpdate(
@@ -40,7 +40,7 @@ export async function addWatchedMovie(userId: string, movieId: string) {
   }
 }
 
-export async function deleteWatchedMovie(userId: string, movieId: string) {
+export async function deleteWatchedMovie(userId: string, movieId: number) {
   try {
     return documentToUser(
       await userDataModel.findOneAndUpdate(
@@ -94,7 +94,7 @@ export async function deleteList(userId: string, listName: string) {
   }
 }
 
-export async function addMovieToList(userId: string, listName: string, movieId: string) {
+export async function addMovieToList(userId: string, listName: string, movieId: number) {
   try {
     const doc = await userDataModel.findOne({userId});
     if (!doc) return null;
@@ -113,7 +113,7 @@ export async function addMovieToList(userId: string, listName: string, movieId: 
   }
 }
 
-export async function deleteMovieFromList(userId: string, listName: string, movieId: string) {
+export async function deleteMovieFromList(userId: string, listName: string, movieId: number) {
   try {
     const doc = await userDataModel.findOne({userId});
     if (!doc) return null;

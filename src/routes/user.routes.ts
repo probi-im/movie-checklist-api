@@ -6,10 +6,10 @@ const router = Router();
 
 router.get('/:userId', getUserData)
 router.post('/:userId/watchedMovies', watchMovie)
-router.delete('/:userId/watchedMovies', unwatchMovie)
+router.delete('/:userId/watchedMovies/:movieId', unwatchMovie)
 router.post('/:userId/lists', createListHandler)
-router.delete('/:userId/lists', deleteListHandler)
-router.post('/:userId/lists/movies', addMovieToListHander)
-router.delete('/:userId/lists/movies', deleteMovieFromListHander)
+router.delete('/:userId/lists/:listName', deleteListHandler)
+router.post('/:userId/lists/:listName/movies', addMovieToListHander)
+router.delete('/:userId/lists/:listName/movies/:movieId', deleteMovieFromListHander)
 
 export default router;
