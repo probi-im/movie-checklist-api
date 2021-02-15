@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { addWatchedMovie, deleteWatchedMovie, findUserData } from "../services/user.service";
+import { addMovieToList, addWatchedMovie, createList, deleteList, deleteMovieFromList, deleteWatchedMovie, findUserData } from "../services/user.service";
 
 export async function getUserData(request: Request, response: Response) {
   const {userId} = request.params;
@@ -45,6 +45,82 @@ export async function unwatchMovie(request: Request, response: Response) {
   } catch (error) {
     return response.status(400).json({
       message: error.message,
+    })
+  }
+}
+
+export async function createListHandler(request: Request, response: Response) {
+  const {userId} = request.params;
+  const {listName} = request.body;
+
+  if (!listName) {
+    return response.status(500).json({
+      message: 'Missing listName field'
+    })
+  }
+  try {
+    const data = await createList(userId, listName);
+    return response.status(200).json(data)
+  } catch (error) {
+    return response.status(400).json({
+      message: error.message
+    })
+  }
+}
+
+export async function deleteListHandler(request: Request, response: Response) {
+  const {userId} = request.params;
+  const {listName} = request.body;
+
+  if (!listName) {
+    return response.status(500).json({
+      message: 'Missing listName field'
+    })
+  }
+  try {
+    const data = await deleteList(userId, listName);
+    return response.status(200).json(data)
+  } catch (error) {
+    return response.status(400).json({
+      message: error.message
+    })
+  }
+}
+
+export async function addMovieToListHander(request: Request, response: Response) {
+  const {userId} = request.params;
+  const {listName, movieId} = request.body;
+
+  if (!listName || !movieId) {
+    return response.status(500).json({
+      message: 'Missing listName or movieId field(s)'
+    })
+  }
+  try {
+    const data = await addMovieToList(userId, listName, movieId);
+    return response.status(200).json(data)
+  } catch (error) {
+    return response.status(400).json({
+      message: error.message
+    })
+  }
+}
+
+export async function deleteMovieFromListHander(request: Request, response: Response) {
+  const {userId} = request.params;
+  const {listName, movieId} = request.body;
+
+  if (!listName || !movieId) {
+    return response.status(500).json({
+      message: 'Missing listName or movieId field(s)'
+    })
+  }
+  try {
+    const data = await deleteMovieFromList(userId, listName, movieId);
+    return response.status(200).json(data)
+  } catch (error) {
+    return response.status(400).json({
+      message: error.message
     })
   }
 }
